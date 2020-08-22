@@ -7,7 +7,7 @@ class Account():
         self.username = username
         self.password = password
         self.email = email
-        self.gallery={}
+        self.gallery={}       
         self.counter=1
         self.options = {
 
@@ -31,16 +31,6 @@ class Account():
 
              """)
     
-    def search_image(self):
-        search = input('What image would you like to search?')
-        image = Search_Image(search)
-        ans= input("Would you like to save the image to your gallary?").lower()
-        print("Please enter either yes or no")
-        if ans== 'yes':
-            self.gallery[counter]=image.image_link
-            self.counter += 1
-        else:
-            return display_options
 
     def view_image(self):
         print(self.gallery)

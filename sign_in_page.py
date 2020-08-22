@@ -34,11 +34,22 @@ class Sign_In_Page:
              Q. Sign Out
              """)
 
+    def search_image(self):
+        search = input('What image would you like to search?')
+        image = Search_Image(search)
+        ans= input("Would you like to save the image to your gallary?").lower()
+        print("Please enter either yes or no")
+        if ans== 'yes':
+            self.gallery[counter]=image.image_link
+            self.counter += 1
+        else:
+            return display_options
+
    
+
     def run(self):
         while True:
-            self.display_options()
-            self.order_menu()
+            self.display_options()  
 
             option = input("Enter an option: ")
 
