@@ -5,13 +5,14 @@ from subMenu import Sub_Menu
 from account import Account
 
 class Application:
-    def __init__(self, accountDic={}):
-        self.accountDict = accountDic
+    def __init__(self, accountDict={}):
+        self.accountDict = accountDict
     
     def sign_up(self):
         username= input("Please enter a username for your account: ")
         if username not in self.accountDict.keys():
-            account = Account(username)
+            password = input("Please enter a password")
+            account = Account(username,password)
             self.accountDict[username] = account
             print(f"Congratulations, you've successfully created an account with the username \"{username}\"!")
         else:
