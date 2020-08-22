@@ -8,7 +8,7 @@ import os
 class search_image:
   def __init__(self,image):
       image = image.lower()
-      base_url  = "https://api.pexels.com/v1/search"
+      base_url  = "https://api.pexels.com/v1"
       key = os.getenv('api_key')
       query_params = {"function": "TIME_SERIES_INTRADAY" , "symbol": stock_symbol, "interval": "5min", "apikey": key}
       response = requests.get(base_url, query_params)
