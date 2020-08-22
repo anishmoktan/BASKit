@@ -10,7 +10,7 @@ class Search_Image:
       headers = {"Authorization": api_key}
       try:
           response = requests.get(url, params=search_param, headers=headers)
-          data= response.json()
+          data = response.json()
          
           self.image_link=data['photos'][0]['src']['large']
 

@@ -1,17 +1,20 @@
 #The back-bone of the application
 #Will have the CRUD for accounts and a Sign-in option
 #Need to connect to the API
-from subMenu import Sub_Menu
+
 from account import Account
+from sign_in_page import Sign_In_Page
 
 class Application:
-    def __init__(self, accountDic={}):
-        self.accountDict = accountDic
+    def __init__(self, accountDict={}):
+        self.accountDict = accountDict
     
     def sign_up(self):
         username= input("Please enter a username for your account: ")
         if username not in self.accountDict.keys():
-            account = Account(username)
+            password = input("Please enter a password: ")
+            email = input("Please enter an email address: ")
+            account = Account(username,password,email)
             self.accountDict[username] = account
             print(f"Congratulations, you've successfully created an account with the username \"{username}\"!")
         else:
@@ -27,13 +30,6 @@ class Application:
                 print(f"The account with username \"{username}\" has been successfully deleted!")
             else:
                 print(f"The account with username \"{username}\" does not exist!\n")
-    
-    def show_accounts(self):
-        if self.accountDict= {}:
-            print("There are currenlty no accounts to look up in our system")
-        else:
-            for accounts in self.accountDict:
-                print(accounts)
 
     def update_account(self):
         if self.accountDict == {}:
@@ -56,7 +52,7 @@ class Application:
             username = input("Please enter your username to sign in: ")
             if username in self.accountDict.keys():
                 account_info = self.accountDict[username]
-                signed_In = Sub_Menu(account_info)
+                signed_In = Sign_In_Page(account_info)
                 signed_In.run()
             else:
                 print(

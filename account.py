@@ -3,8 +3,10 @@ from search_image import Search_Image
 from application import Application
 
 class Account():
-    def __init__(self, username):
+    def __init__(self, username, password,email):
         self.username = username
+        self.password = password
+        self.email = email
         self.gallery={}
         self.counter=1
         self.options = {
@@ -34,7 +36,7 @@ class Account():
         image = Search_Image(search)
         ans= input("Would you like to save the image to your gallary?").lower()
         print("Please enter either yes or no")
-        if ans== yes:
+        if ans== 'yes':
             self.gallery[counter]=image.image_link
             self.counter += 1
         else:
@@ -44,8 +46,13 @@ class Account():
         print(self.gallery)
     
     def update_account(self):
-        new_username = input('Please enter the new username for this account: ')
-        
+        old_password = input('Please enter your old password: ')
+        if old_password == self.password:
+            new_password = input('Please enter a new password: ')
+            self.password = new_password
+
+        else:
+            print("You have entered an invalid password!")
 
     
     def run(self):

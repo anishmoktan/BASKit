@@ -1,56 +1,55 @@
 #Shows what the user can have access to when they sign in
 
 from account import Account
+from search_image import Search_Image
 import json
 import requests
 import os
 
-class Sub_Menu:
+class Sign_In_Page:
     
     def __init__(self, account):
         self.account = account
-        self.price = {'coffee': 1, 'latte': 2, 'cappuccino': 2, 'donut': 1}
         self.options = {
 
-            "1": self.add_balance,
+            "1": self.search_photo,
 
-            "2": self.add_to_shopping_cart,
+            "2": self.update_account,
 
-            "3": self.remove_from_shopping_cart,
+            "3": self.show_gallery,
 
-            "4": self.account.display_shopping_cart,
+            "4": self.account.display_s,
 
             "5": self.account.checkout
         }
 
     def display_options(self):
         print(""" 
-            ************* LMTD Coffee Shop *************
              You have successfully signed in! 
              Please choose one of the options below:
  
-             1. Add balance to your account
- 
-             2. Add order(s) to your shopping cart
- 
-             3. Remove order(s) from your shopping cart
-             4. Display your current shopping cart
-             5. Check out from the store
-             Q. Quit
+             1. Search Photos
+             2. Update Account
+             3. Show Gallery
+             Q. Sign Out
              """)
 
-    def order_menu(self):
-        print("""
-            Coffee ----------------------------------  $1
-            Latte  ----------------------------------  $2
-            Cappuccino ------------------------------  $2
-            Donut  ----------------------------------  $1
-            """)
+    def search_image(self):
+        search = input('What image would you like to search?')
+        image = Search_Image(search)
+        ans= input("Would you like to save the image to your gallary?").lower()
+        print("Please enter either yes or no")
+        if ans== 'yes':
+            self.gallery[counter]=image.image_link
+            self.counter += 1
+        else:
+            return display_options
+
+   
 
     def run(self):
         while True:
-            self.display_options()
-            self.order_menu()
+            self.display_options()  
 
             option = input("Enter an option: ")
 
@@ -65,7 +64,7 @@ class Sub_Menu:
                 print(
                     "{0} is not a valid option, Please try again".format(option))
 
-    def add_balance(self):
+    def search_photo(self):
 
         try:
             amount = float(
@@ -82,7 +81,7 @@ class Sub_Menu:
         except:
             print("Only number is allowed!")
 
-    def add_to_shopping_cart(self):
+    def update_account(self):
 
         item_name = input("Enter the name of the item: ").lower()
 
@@ -105,7 +104,7 @@ class Sub_Menu:
 
         time.sleep(2)
 
-    def remove_from_shopping_cart(self):
+    def show_gallery(self):
 
         if len(self.account.shopping_cart) > 0:
 
