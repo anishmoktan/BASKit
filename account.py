@@ -1,9 +1,14 @@
 #Will have the class for each accounts
+from search_image import Search_Image
+from application import Application
+
 class Account():
     def __init__(self, username):
         self.username = username
+        self.gallery={}
+        self.counter=1
         self.options = {
-            
+
             "1": self.search_image,
 
             "2": self.view_image,
@@ -24,11 +29,24 @@ class Account():
 
              """)
     
-    def search_image():
+    def search_image(self):
+        search = input('What image would you like to search?')
+        image = Search_Image(search)
+        ans= input("Would you like to save the image to your gallary?").lower()
+        print("Please enter either yes or no")
+        if ans== yes:
+            self.gallery[counter]=image.image_link
+            self.counter += 1
+        else:
+            return display_options
 
-    def view_image():
+    def view_image(self):
+        print(self.gallery)
     
-    def update_account():
+    def update_account(self):
+        new_username = input('Please enter the new username for this account: ')
+        
+
     
     def run(self):
         while True:
