@@ -17,37 +17,63 @@ class Sign_In_Page:
             "2": self.update_account,
 
             "3": self.show_gallery,
-
-            "4": self.account.display_s,
-
-            "5": self.account.checkout
         }
 
-    def display_options(self):
+    def display_options(self):  
         print(""" 
              You have successfully signed in! 
              Please choose one of the options below:
  
              1. Search Photos
-             2. Update Account
-             3. Show Gallery
+             2. Show Gallery
+             3. Change Username
+             4. Change email address
+             5. Change password
              Q. Sign Out
              """)
 
-    def search_image(self):
+    def search_photo(self):
         search = input('What image would you like to search?')
         image = Search_Image(search)
         ans= input("Would you like to save the image to your gallary?").lower()
         print("Please enter either yes or no")
         if ans== 'yes':
-            self.gallery[counter]=image.image_link
+            self.account.gallery[counter]=image.image_link
             self.counter += 1
         else:
             return display_options
 
-   
+    
+    def show_gallery(self):
+        for key, value in self.account.gallery.items():
+            print(key, ' : ', value)
 
-    def run(self):
+    def change_username(self):
+        new_username= str(input('Enter the new username: '))
+        self.account.username=new_username
+
+    def change_email(self):
+        new_email= str(input('Enter the new email: '))
+        self.account.email=new_email
+        
+
+        
+
+    def show_gallery(self):
+
+        if len(self.account.shopping_cart) > 0:
+
+            target_name = input("Enter the name of the item: ").lower()
+            if target_name in self.price.keys():
+                self.account.remove_from_shopping_cart(target_name)
+            else:
+                print(f"\"{target_name}\" not in the list")
+        else:
+            print("You don't have anything in your shopping cart")
+
+    
+
+        def run(self):
         while True:
             self.display_options()  
 
@@ -63,57 +89,3 @@ class Sign_In_Page:
             else:
                 print(
                     "{0} is not a valid option, Please try again".format(option))
-
-    def search_photo(self):
-
-        try:
-            amount = float(
-                input("Enter the amount of money you want to add: "))
-
-            if amount < 0:
-                raise Exception("Cannot accept negative value")
-
-            self.account.add_balance(amount)
-
-        except Exception as NegativeAmountError:
-            print(NegativeAmountError)
-
-        except:
-            print("Only number is allowed!")
-
-    def update_account(self):
-
-        item_name = input("Enter the name of the item: ").lower()
-
-        if item_name in self.price.keys():
-
-            try:
-                item_amount = int(
-                    input(f"How many of {item_name} do you want: "))
-
-                item_total_price = self.price[item_name] * item_amount
-
-                self.account.add_to_shopping_cart(
-                    (item_name, item_amount, item_total_price))
-
-            except ValueError:
-                print("Only number is allowed!")
-
-        else:
-            print(f"\"{item_name}\" not in the list")
-
-        time.sleep(2)
-
-    def show_gallery(self):
-
-        if len(self.account.shopping_cart) > 0:
-
-            target_name = input("Enter the name of the item: ").lower()
-            if target_name in self.price.keys():
-                self.account.remove_from_shopping_cart(target_name)
-            else:
-                print(f"\"{target_name}\" not in the list")
-        else:
-            print("You don't have anything in your shopping cart")
-
-        time.sleep(2)
