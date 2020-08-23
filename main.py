@@ -9,6 +9,7 @@
 #     app.run(debug=True)
 from main_menu import Main_Menu
 if __name__ == "__main__":
-    Main_Menu.run()
+    main_menu=Main_Menu()
+    main_menu.run()
 
 

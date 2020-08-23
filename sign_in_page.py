@@ -10,13 +10,18 @@ class Sign_In_Page:
     
     def __init__(self, account):
         self.account = account
+        self.app = Account
         self.options = {
 
             "1": self.search_photo,
 
-            "2": self.update_account,
+            "2": self.show_gallery,
 
-            "3": self.show_gallery,
+            "3": self.change_username,
+
+            "4": self.change_email,
+
+            "5": self.change_password,
         }
 
     def display_options(self):  
@@ -38,11 +43,10 @@ class Sign_In_Page:
         ans= input("Would you like to save the image to your gallary?").lower()
         print("Please enter either yes or no")
         if ans== 'yes':
-            self.account.gallery[counter]=image.image_link
-            self.counter += 1
+            self.account.gallery[account.counter]=image.image_link
+            account.counter += 1
         else:
             return display_options
-
     
     def show_gallery(self):
         for key, value in self.account.gallery.items():
@@ -50,42 +54,30 @@ class Sign_In_Page:
 
     def change_username(self):
         new_username= str(input('Enter the new username: '))
-        self.account.username=new_username
+    
+        update_account = self.app.accountDict[self.account.username]
+        update_account.username = new_username
+        self.app.accountDict[new_username] = self.app.accountDict.pop(self.account.username)
+        print(f"Your username has been changed to \"{new_username}\"\n")
+        
 
     def change_email(self):
         new_email= str(input('Enter the new email: '))
         self.account.email=new_email
         
+    def change_password(self):
+        new_password= str(input('Enter the new password: '))
+        self.account.password=new_password
 
-        
-
-    def show_gallery(self):
-
-        if len(self.account.shopping_cart) > 0:
-
-            target_name = input("Enter the name of the item: ").lower()
-            if target_name in self.price.keys():
-                self.account.remove_from_shopping_cart(target_name)
-            else:
-                print(f"\"{target_name}\" not in the list")
-        else:
-            print("You don't have anything in your shopping cart")
-
-    
-
-        def run(self):
+    def run(self):
         while True:
             self.display_options()  
-
             option = input("Enter an option: ")
-
             if option.lower() == "q":
                 break
 
             action = self.options.get(option)
             if action:
                 action()
-
             else:
-                print(
-                    "{0} is not a valid option, Please try again".format(option))
+                print("{0} is not a valid option, Please try again".format(option))

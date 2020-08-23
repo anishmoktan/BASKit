@@ -1,7 +1,5 @@
-#Will have the class for each accounts
 import json
-from search_image import Search_Image
-from application import Application
+
 
 class Account():
     def __init__(self, username, password, email):
@@ -67,5 +65,7 @@ class Account():
                 action()
             else:
                 print("{0} is not a valid option, Please try again".format(option))
+    
+    
 
 
