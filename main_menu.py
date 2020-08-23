@@ -10,6 +10,12 @@ class Main_Menu:
             "1": self.app.sign_up,
 
             "2": self.app.sign_in,
+
+            "3": self.app.update_account,
+
+            "4": self.app.delete_account
+
+
         }
 
     def display_options(self):
@@ -20,8 +26,8 @@ class Main_Menu:
  
              1. Create an account
              2. Sign in to your account
-             3. Delete Account
-             4. Update Account
+             3. Update username
+             4. Delete Account
              Q. Quit
              """)
 

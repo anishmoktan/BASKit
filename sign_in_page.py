@@ -40,11 +40,10 @@ class Sign_In_Page:
     def search_photo(self):
         search = input('What image would you like to search?')
         image = Search_Image(search)
-        ans= input("Would you like to save the image to your gallary?").lower()
+        ans= str(input("Would you like to save the image to your gallary?").lower())
         print("Please enter either yes or no")
         if ans== 'yes':
             self.account.gallery[search]=image.image_link
-            account.counter += 1
         else:
             return display_options
     
@@ -80,4 +79,4 @@ class Sign_In_Page:
             if action:
                 action()
             else:
-                print("{0} is not a valid option, Please try again".format(option))
+                print("{0} is not a valid option, please try again!".format(option))

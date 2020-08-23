@@ -6,8 +6,8 @@ from account import Account
 from sign_in_page import Sign_In_Page
 
 class Application:
-    def __init__(self):
-        self.accountDict = {}
+    def __init__(self,accountDic={}):
+        self.accountDict = accountDic
     
     def sign_up(self):
         username= input("Please enter a username for your account: ")
@@ -52,8 +52,12 @@ class Application:
             username = input("Please enter your username to sign in: ")
             if username in self.accountDict.keys():
                 account_info = self.accountDict[username]
-                signed_In = Sign_In_Page(account_info)
-                signed_In.run()
+                password=str(input("Please enter your password: "))
+                if password == account_info.password:
+                    signed_In = Sign_In_Page(account_info)
+                    signed_In.run()
+                else:
+                    print("Wrong password, please try again!")
             else:
                 print(
                     f"The account with username \"{username}\" does not exist!\n")
