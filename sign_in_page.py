@@ -43,7 +43,7 @@ class Sign_In_Page:
         ans= input("Would you like to save the image to your gallary?").lower()
         print("Please enter either yes or no")
         if ans== 'yes':
-            self.account.gallery[account.counter]=image.image_link
+            self.account.gallery[search]=image.image_link
             account.counter += 1
         else:
             return display_options

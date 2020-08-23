@@ -20,6 +20,8 @@ class Main_Menu:
  
              1. Create an account
              2. Sign in to your account
+             3. Delete Account
+             4. Update Account
              Q. Quit
              """)
 

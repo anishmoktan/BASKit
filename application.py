@@ -20,30 +20,30 @@ class Application:
         else:
             print(f"An account with the username \"{username}\" already exists, please try again!")
     
-    # def delete_account(self):
-    #     if self.accountDict == {}:
-    #         print("There are no accounts to delete!\n")
-    #     else:
-    #         username = input("Please enter the username you're deleting: ")
-    #         if username in self.accountDict.keys():
-    #             self.accountDict.pop(username)
-    #             print(f"The account with username \"{username}\" has been successfully deleted!")
-    #         else:
-    #             print(f"The account with username \"{username}\" does not exist!\n")
+    def delete_account(self):
+        if self.accountDict == {}:
+            print("There are no accounts to delete!\n")
+        else:
+            username = input("Please enter the username you're deleting: ")
+            if username in self.accountDict.keys():
+                self.accountDict.pop(username)
+                print(f"The account with username \"{username}\" has been successfully deleted!")
+            else:
+                print(f"The account with username \"{username}\" does not exist!\n")
 
-    # def update_account(self):
-    #     if self.accountDict == {}:
-    #         print("There are no accounts in the application to update!\n")
-    #     else:
-    #         username = input("Please enter your username you're updating: ")
-    #         if username in self.accountDict.keys():
-    #             new_username = input("Please enter the new username for that account: ")
-    #             update_account = self.accountDict[username]
-    #             update_account.username = new_username
-    #             self.accountDict[new_username] = self.accountDict.pop(username)
-    #             print(f"The username of \"{username}\" has been changed to \"{new_username}\"\n")
-    #         else:
-    #             print(f"The account with username \"{username}\" does not exist!\n")
+    def update_account(self):
+        if self.accountDict == {}:
+            print("There are no accounts in the application to update!\n")
+        else:
+            username = input("Please enter your username you're updating: ")
+            if username in self.accountDict.keys():
+                new_username = input("Please enter the new username for that account: ")
+                update_account = self.accountDict[username]
+                update_account.username = new_username
+                self.accountDict[new_username] = self.accountDict.pop(username)
+                print(f"The username of \"{username}\" has been changed to \"{new_username}\"\n")
+            else:
+                print(f"The account with username \"{username}\" does not exist!\n")
 
     def sign_in(self):
         if self.accountDict == {}:
