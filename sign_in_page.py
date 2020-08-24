@@ -38,9 +38,9 @@ class Sign_In_Page:
              """)
 
     def search_photo(self):
-        search = input('What image would you like to search?')
+        search = input('What image would you like to search?: ')
         image = Search_Image(search)
-        ans= str(input("Would you like to save the image to your gallary?").lower())
+        ans= str(input("Would you like to save the image to your gallary?: ").lower())
         print("Please enter either yes or no")
         if ans== 'yes':
             self.account.gallery[search]=image.image_link
