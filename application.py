@@ -1,25 +1,31 @@
-#The back-bone of the application
-#Will have the CRUD for accounts and a Sign-in option
-#Need to connect to the API
+# The back-bone of the application
+# Will have the CRUD for accounts and a Sign-in option
+# Need to connect to the API
 import json
 from account import Account
 from sign_in_page import Sign_In_Page
 
+
 class Application:
-    def __init__(self,accountDic={}):
+    def __init__(self, accountDic=[]):
         self.accountDict = accountDic
-    
+
     def sign_up(self):
-        username= input("Please enter a username for your account: ")
-        if username not in self.accountDict.keys():
+        username = input("Please enter a username for your account: ")
+        for acc in self.accountDict:
+            if acc.username == username:
+                print(
+                    f"An account with the username \"{username}\" already exists, please try again!")
+                break
+
+        else:
             password = input("Please enter a password: ")
             email = input("Please enter an email address: ")
-            account = Account(username,password,email)
-            self.accountDict[username] = account #{'Cam':class data}
-            print(f"Congratulations, you've successfully created an account with the username \"{username}\"!")
-        else:
-            print(f"An account with the username \"{username}\" already exists, please try again!")
-    
+            account = Account(username, password, email)
+            self.accountDict.append(account)
+            print(
+                f"Congratulations, you've successfully created an account with the username \"{username}\"!")
+
     def delete_account(self):
         if self.accountDict == {}:
             print("There are no accounts to delete!\n")
@@ -27,9 +33,11 @@ class Application:
             username = input("Please enter the username you're deleting: ")
             if username in self.accountDict.keys():
                 self.accountDict.pop(username)
-                print(f"The account with username \"{username}\" has been successfully deleted!")
+                print(
+                    f"The account with username \"{username}\" has been successfully deleted!")
             else:
-                print(f"The account with username \"{username}\" does not exist!\n")
+                print(
+                    f"The account with username \"{username}\" does not exist!\n")
 
     def update_account(self):
         if self.accountDict == {}:
@@ -37,13 +45,16 @@ class Application:
         else:
             username = input("Please enter your username you're updating: ")
             if username in self.accountDict.keys():
-                new_username = input("Please enter the new username for that account: ")
+                new_username = input(
+                    "Please enter the new username for that account: ")
                 update_account = self.accountDict[username]
                 update_account.username = new_username
                 self.accountDict[new_username] = self.accountDict.pop(username)
-                print(f"The username of \"{username}\" has been changed to \"{new_username}\"\n")
+                print(
+                    f"The username of \"{username}\" has been changed to \"{new_username}\"\n")
             else:
-                print(f"The account with username \"{username}\" does not exist!\n")
+                print(
+                    f"The account with username \"{username}\" does not exist!\n")
 
     def sign_in(self):
         if self.accountDict == {}:
@@ -52,7 +63,7 @@ class Application:
             username = input("Please enter your username to sign in: ")
             if username in self.accountDict.keys():
                 account_info = self.accountDict[username]
-                password=str(input("Please enter your password: "))
+                password = str(input("Please enter your password: "))
                 if password == account_info.password:
                     signed_In = Sign_In_Page(account_info)
                     signed_In.run()
@@ -71,7 +82,6 @@ class Application:
             decoded_accounts[username] = Account.from_json(account)
 
         return decoded_accounts
-
 
     def load(self):
         with open("accounts.json", "r") as accounts_json:
