@@ -12,9 +12,9 @@ class Account():
         
         username, password, email, gallery = data["username"], data["password"], data["email"], {}
 
-        # for item in data["shopping_cart"]:
-        #     tuple_item = tuple(item)
-        #     shopping_cart.append(tuple_item)
+        for item in data["gallery"]:
+            tuple_item = tuple(item)
+            gallery.append(tuple_item)
 
         return cls(username=username, password=password,email=email, gallery=gallery)
        
