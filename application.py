@@ -9,6 +9,7 @@ from sign_in_page import Sign_In_Page
 class Application:
     def __init__(self, accountDic=[]):
         self.accountDict = accountDic
+        #[Objt1, Objt2, Objt3]
 
     def sign_up(self):
         username = input("Please enter a username for your account: ")
@@ -17,7 +18,6 @@ class Application:
                 print(
                     f"An account with the username \"{username}\" already exists, please try again!")
                 break
-
         else:
             password = input("Please enter a password: ")
             email = input("Please enter an email address: ")
@@ -26,52 +26,52 @@ class Application:
             print(
                 f"Congratulations, you've successfully created an account with the username \"{username}\"!")
 
-    def delete_account(self):
-        if self.accountDict == {}:
-            print("There are no accounts to delete!\n")
-        else:
-            username = input("Please enter the username you're deleting: ")
-            if username in self.accountDict.keys():
-                self.accountDict.pop(username)
-                print(
-                    f"The account with username \"{username}\" has been successfully deleted!")
-            else:
-                print(
-                    f"The account with username \"{username}\" does not exist!\n")
-
-    def update_account(self):
-        if self.accountDict == {}:
-            print("There are no accounts in the application to update!\n")
-        else:
-            username = input("Please enter your username you're updating: ")
-            if username in self.accountDict.keys():
-                new_username = input(
-                    "Please enter the new username for that account: ")
-                update_account = self.accountDict[username]
-                update_account.username = new_username
-                self.accountDict[new_username] = self.accountDict.pop(username)
-                print(
-                    f"The username of \"{username}\" has been changed to \"{new_username}\"\n")
-            else:
-                print(
-                    f"The account with username \"{username}\" does not exist!\n")
-
     def sign_in(self):
-        if self.accountDict == {}:
+        if self.accountDict == []:
             print("There are no accounts in the application to sign in to!\n")
         else:
-            username = input("Please enter your username to sign in: ")
-            if username in self.accountDict.keys():
-                account_info = self.accountDict[username]
-                password = str(input("Please enter your password: "))
-                if password == account_info.password:
-                    signed_In = Sign_In_Page(account_info)
-                    signed_In.run()
-                else:
-                    print("Wrong password, please try again!")
+            username = str(input("Please enter your username to sign in: "))
+            for acc in self.accountDict:
+                    if acc.username == username:
+                        account_info = acc
+                        password = str(input("Please enter your password: "))
+                        if password == account_info.password:
+                            sign_In = Sign_In_Page(account_info,self.accountDict)
+                            sign_In.run()
+                            break
+                        else:
+                            print("Wrong password, please try again!")
             else:
-                print(
-                    f"The account with username \"{username}\" does not exist!\n")
+                print(f'The username \"{username}\" does not exist in our system!')
+                 
+    
+    
+
+
+            # for acc in range(len(self.accountDict)-1):
+            #     if self.accountDict[acc].username == username:
+            #         account_info = self.accountDict[acc]
+            #         password = str(input("Please enter your password: "))
+            #         if password == account_info.password:
+            #             sign_In = Sign_In_Page(account_info)
+            #             sign_In.run()
+            #         else:
+            #             print("Wrong password, please try again!")
+            #     else:
+            #         print(f'The username you enetered, \"{username}\", does not exist. Please try again')
+            
+            # for acc in range(len(self.accountDict)-1):
+            #     if self.accountDict[acc].username == username:
+            #         account_info = self.accountDict[acc]
+            #         password = str(input("Please enter your password: "))
+            #         if password == account_info.password:
+            #             sign_In = Sign_In_Page(account_info)
+            #             sign_In.run()
+            #         else:
+            #             print("Wrong password, please try again!")
+            #     else:
+            #         print(f'The username you enetered, \"{username}\", does not exist. Please try again')
+
 
     @classmethod
     def from_json(cls, data):
