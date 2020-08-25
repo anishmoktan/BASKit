@@ -9,6 +9,7 @@ from sign_in_page import Sign_In_Page
 class Application:
     def __init__(self, accountDic=[]):
         self.accountDict = accountDic
+        #[Objt1, Objt2, Objt3]
 
     def sign_up(self):
         username = input("Please enter a username for your account: ")
@@ -25,42 +26,24 @@ class Application:
             print(
                 f"Congratulations, you've successfully created an account with the username \"{username}\"!")
 
-    def delete_account(self):
-        if self.accountDict == []:
-            print("There are no accounts to delete!\n")
-        else:
-            username = input("Please enter the username you're deleting: ")
-            for acc in range(len(self.accountDict)-1):
-                if self.accountDict[acc].username == username:
-                    account_info = self.accountDict[acc]
-                    password = input("Please enter the account's password for confirmation: ")
-                    if password == account_info.password:
-                        self.accountDict.pop(acc)
-                    else:
-                        print("The password is invalid, please try again.")
-                        break
-                else:
-                    print(f'The username you\'ve entered, \"{username}\", does not exist. Please try again!')
-
     def sign_in(self):
         if self.accountDict == []:
             print("There are no accounts in the application to sign in to!\n")
         else:
             username = str(input("Please enter your username to sign in: "))
             for acc in self.accountDict:
-                try:
                     if acc.username == username:
                         account_info = acc
                         password = str(input("Please enter your password: "))
                         if password == account_info.password:
-                            sign_In = Sign_In_Page(account_info)
+                            sign_In = Sign_In_Page(account_info,self.accountDict)
                             sign_In.run()
                             break
                         else:
                             print("Wrong password, please try again!")
-                finally :
-                    print(f'{username} does not exist in our system, please try again!')
-                    return sign_in
+            else:
+                print(f'The username \"{username}\" does not exist in our system!')
+                 
     
     
 

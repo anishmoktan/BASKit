@@ -6,8 +6,10 @@ import json
 
 class Sign_In_Page:
     
-    def __init__(self, account):
+    def __init__(self, account, Acc_list):
         self.account = account
+        self.accountList = Acc_list
+        print(self.accountList)
         self.options = {
 
             "1": self.search_photo,
@@ -19,6 +21,8 @@ class Sign_In_Page:
             "4": self.change_email,
 
             "5": self.change_password,
+
+            "6": self.delete_account
         }
 
     def display_options(self):  
@@ -31,6 +35,7 @@ class Sign_In_Page:
              3. Change Username
              4. Change email address
              5. Change password
+             6. Delete account
              Q. Sign Out
              """)
 
@@ -42,26 +47,47 @@ class Sign_In_Page:
         if ans == 'yes':
             self.account.gallery[search]=image.image_link
         else:
-            return display_options
+            return True
     
     def show_gallery(self):
         for key, value in self.account.gallery.items():
             print(key, ' : ', value)
+        return True
 
     def change_username(self):
         new_username = str(input('Enter the new username: '))
         self.account.username = new_username
         print(f"Your username has been changed to \"{new_username}\"\n")
+        return True
 
     def change_email(self):
         new_email = str(input('Enter the new email: '))
         self.account.email = new_email
         print(f"Your email has been changed to \"{new_email}\"\n")
+        return True
         
     def change_password(self):
         new_password = str(input('Enter the new password: '))
         self.account.password = new_password
         print(f"Your password has been changed to \"{new_password}\"\n")
+        return True
+
+    def delete_account(self):
+        print('HELLO')
+        print(self.accountList)
+        print(len(self.accountList))
+        for i in range(len(self.accountList)):
+            if self.accountList[i].username == self.account.username:
+                pop_acc = self.accountList[i]
+                print(pop_acc)
+                password = input("Please enter the account's password for confirmation: ")
+                if password == pop_acc.password:
+                    self.accountList.pop(i)
+                    print("Your account has been successfully deleted!")
+                    return False
+                else:
+                    print("The password is invalid, please try again.")
+        return True        
 
     def run(self):
         while True:
@@ -72,6 +98,8 @@ class Sign_In_Page:
 
             action = self.options.get(option)
             if action:
-                action()
+                return_statement = action()
+                if return_statement == False:
+                    break
             else:
                 print("{0} is not a valid option, please try again!".format(option))
