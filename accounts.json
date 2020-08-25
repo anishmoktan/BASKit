@@ -1,10 +1,11 @@
-{
-	"kai": {
-		"email": "kai@gmail.com",
-		"gallery": {
-			"apple": "https://images.pexels.com/photos/102104/pexels-photo-102104.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-		},
-		"password": "password",
-		"username": "kai"
-	}
-}
+// {
+// 	"kai": {
+// 		"email": "kai@gmail.com",
+// 		"gallery": {
+// 			"apple": "https://images.pexels.com/photos/102104/pexels-photo-102104.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+// 		},
+// 		"password": "password",
+// 		"username": "kai"
+// 	}
+// }
+{}

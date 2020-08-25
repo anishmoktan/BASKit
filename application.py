@@ -17,7 +17,6 @@ class Application:
                 print(
                     f"An account with the username \"{username}\" already exists, please try again!")
                 break
-
         else:
             password = input("Please enter a password: ")
             email = input("Please enter an email address: ")
@@ -27,51 +26,41 @@ class Application:
                 f"Congratulations, you've successfully created an account with the username \"{username}\"!")
 
     def delete_account(self):
-        if self.accountDict == {}:
+        if self.accountDict == []:
             print("There are no accounts to delete!\n")
         else:
             username = input("Please enter the username you're deleting: ")
-            if username in self.accountDict.keys():
-                self.accountDict.pop(username)
-                print(
-                    f"The account with username \"{username}\" has been successfully deleted!")
-            else:
-                print(
-                    f"The account with username \"{username}\" does not exist!\n")
 
-    def update_account(self):
-        if self.accountDict == {}:
-            print("There are no accounts in the application to update!\n")
-        else:
-            username = input("Please enter your username you're updating: ")
-            if username in self.accountDict.keys():
-                new_username = input(
-                    "Please enter the new username for that account: ")
-                update_account = self.accountDict[username]
-                update_account.username = new_username
-                self.accountDict[new_username] = self.accountDict.pop(username)
-                print(
-                    f"The username of \"{username}\" has been changed to \"{new_username}\"\n")
-            else:
-                print(
-                    f"The account with username \"{username}\" does not exist!\n")
+
+            for acc in range(len(self.accountDict)-1):
+                if self.accountDict[acc].username == username:
+                    account_info = self.accountDict[acc]
+                    password = input("Please enter the account's password for confirmation: ")
+                    if password == account_info.password:
+                        self.accountDict.pop(acc)
+                    else:
+                        print("The password is invalid, please try again.")
+                        break
+                else:
+                    print(f'The username you\'ve entered, \"{username}\", does not exist. Please try again!')
 
     def sign_in(self):
-        if self.accountDict == {}:
+        if self.accountDict == []:
             print("There are no accounts in the application to sign in to!\n")
         else:
             username = input("Please enter your username to sign in: ")
-            if username in self.accountDict.keys():
-                account_info = self.accountDict[username]
-                password = str(input("Please enter your password: "))
-                if password == account_info.password:
-                    signed_In = Sign_In_Page(account_info)
-                    signed_In.run()
+            for acc in range(len(self.accountDict)-1):
+                if self.accountDict[acc].username == username:
+                    account_info = self.accountDict[acc]
+                    password = str(input("Please enter your password: "))
+                    if password == account_info.password:
+                        sign_In = Sign_In_Page(account_info)
+                        sign_In.run()
+                    else:
+                        print("Wrong password, please try again!")
                 else:
-                    print("Wrong password, please try again!")
-            else:
-                print(
-                    f"The account with username \"{username}\" does not exist!\n")
+                    print(f'The username you enetered, \"{username}\", does not exist. Please try again')
+
 
     @classmethod
     def from_json(cls, data):

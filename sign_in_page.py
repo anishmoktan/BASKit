@@ -3,14 +3,11 @@
 from account import Account
 from search_image import Search_Image
 import json
-import requests
-import os
 
 class Sign_In_Page:
     
     def __init__(self, account):
         self.account = account
-        self.app = Account
         self.options = {
 
             "1": self.search_photo,
@@ -40,9 +37,9 @@ class Sign_In_Page:
     def search_photo(self):
         search = input('What image would you like to search?: ')
         image = Search_Image(search)
-        ans= str(input("Would you like to save the image to your gallary?: ").lower())
+        ans = str(input("Would you like to save the image to your gallary?: ").lower())
         print("Please enter either yes or no")
-        if ans== 'yes':
+        if ans == 'yes':
             self.account.gallery[search]=image.image_link
         else:
             return display_options
@@ -52,21 +49,19 @@ class Sign_In_Page:
             print(key, ' : ', value)
 
     def change_username(self):
-        new_username= str(input('Enter the new username: '))
-    
-        update_account = self.app.accountDict[self.account.username]
-        update_account.username = new_username
-        self.app.accountDict[new_username] = self.app.accountDict.pop(self.account.username)
+        new_username = str(input('Enter the new username: '))
+        self.account.username = new_username
         print(f"Your username has been changed to \"{new_username}\"\n")
-        
 
     def change_email(self):
-        new_email= str(input('Enter the new email: '))
-        self.account.email=new_email
+        new_email = str(input('Enter the new email: '))
+        self.account.email = new_email
+        print(f"Your email has been changed to \"{new_email}\"\n")
         
     def change_password(self):
-        new_password= str(input('Enter the new password: '))
-        self.account.password=new_password
+        new_password = str(input('Enter the new password: '))
+        self.account.password = new_password
+        print(f"Your password has been changed to \"{new_password}\"\n")
 
     def run(self):
         while True:
