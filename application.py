@@ -9,7 +9,6 @@ from sign_in_page import Sign_In_Page
 class Application:
     def __init__(self, accountDic=[]):
         self.accountDict = accountDic
-        #[Objt1, Objt2, Objt3]
 
     def sign_up(self):
         username = input("Please enter a username for your account: ")
@@ -41,46 +40,16 @@ class Application:
                             break
                         else:
                             print("Wrong password, please try again!")
+                            break
             else:
                 print(f'The username \"{username}\" does not exist in our system!')
                  
-    
-    
-
-
-            # for acc in range(len(self.accountDict)-1):
-            #     if self.accountDict[acc].username == username:
-            #         account_info = self.accountDict[acc]
-            #         password = str(input("Please enter your password: "))
-            #         if password == account_info.password:
-            #             sign_In = Sign_In_Page(account_info)
-            #             sign_In.run()
-            #         else:
-            #             print("Wrong password, please try again!")
-            #     else:
-            #         print(f'The username you enetered, \"{username}\", does not exist. Please try again')
-            
-            # for acc in range(len(self.accountDict)-1):
-            #     if self.accountDict[acc].username == username:
-            #         account_info = self.accountDict[acc]
-            #         password = str(input("Please enter your password: "))
-            #         if password == account_info.password:
-            #             sign_In = Sign_In_Page(account_info)
-            #             sign_In.run()
-            #         else:
-            #             print("Wrong password, please try again!")
-            #     else:
-            #         print(f'The username you enetered, \"{username}\", does not exist. Please try again')
-
-
     @classmethod
     def from_json(cls, data):
-
         # data is the accounts from the accounts.json
-        decoded_accounts = {}
-        for username, account in data.items():
-            decoded_accounts[username] = Account.from_json(account)
-
+        decoded_accounts = []
+        for i in range(len(data)):
+            decoded_accounts.append(Account.from_json(data[i]))
         return decoded_accounts
 
     def load(self):
@@ -90,14 +59,17 @@ class Application:
             self.accountDict = decoded_accounts
 
     def save(self):
-
         with open("accounts.json", "w") as accounts_json:
             serilizated_data = self.serilization()
-            json.dump(serilizated_data, accounts_json,
-                      sort_keys=True, indent=4)
+            json.dump(serilizated_data, accounts_json,sort_keys=True, indent=4)
 
     def serilization(self):
-        serilizated = {}
-        for username, account in self.accountDict.items():
-            serilizated[username] = account.__dict__
-        return serilizated
+        exeList=[]
+        for i in range(len(self.accountDict)):
+            serilizated = {}
+            serilizated["username"] = self.accountDict[i].username
+            serilizated["password"] = self.accountDict[i].password
+            serilizated["email"] = self.accountDict[i].email
+            serilizated["gallery"] = self.accountDict[i].gallery
+            exeList.append(serilizated)
+        return exeList
