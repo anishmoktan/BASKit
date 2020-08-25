@@ -4,7 +4,7 @@ class Main_Menu:
 
     def __init__(self):
         self.app = Application()
-        #self.app.load() #gets called from application.py
+        self.app.load() #gets called from application.py
         self.options = {
 
             "1": self.app.sign_up,
@@ -27,7 +27,6 @@ class Main_Menu:
     def run(self):
         while True:
             self.display_options()
-
             option = input("Enter an option: ")
             if option.lower() == "q":
                 print("Now saved all of the data to file")
@@ -35,7 +34,6 @@ class Main_Menu:
                 break
 
             action = self.options.get(option)
-
             if action:
                 action()
             else:

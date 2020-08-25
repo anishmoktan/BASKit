@@ -9,7 +9,6 @@ class Sign_In_Page:
     def __init__(self, account, Acc_list):
         self.account = account
         self.accountList = Acc_list
-        print(self.accountList)
         self.options = {
 
             "1": self.search_photo,
@@ -26,8 +25,8 @@ class Sign_In_Page:
         }
 
     def display_options(self):  
-        print(""" 
-             You have successfully signed in! 
+        print(f""" 
+             Hi {self.account.username}, you've successfully signed in! 
              Please choose one of the options below:
  
              1. Search Photos
@@ -42,8 +41,7 @@ class Sign_In_Page:
     def search_photo(self):
         search = input('What image would you like to search?: ')
         image = Search_Image(search)
-        ans = str(input("Would you like to save the image to your gallary?: ").lower())
-        print("Please enter either yes or no")
+        ans = str(input("Would you like to save the image to your gallary? (yes/no): ").lower())
         if ans == 'yes':
             self.account.gallery[search]=image.image_link
         else:
@@ -73,17 +71,13 @@ class Sign_In_Page:
         return True
 
     def delete_account(self):
-        print('HELLO')
-        print(self.accountList)
-        print(len(self.accountList))
         for i in range(len(self.accountList)):
             if self.accountList[i].username == self.account.username:
                 pop_acc = self.accountList[i]
-                print(pop_acc)
                 password = input("Please enter the account's password for confirmation: ")
                 if password == pop_acc.password:
                     self.accountList.pop(i)
-                    print("Your account has been successfully deleted!")
+                    print(f"Your account \'{self.account.username}\' has been successfully deleted!")
                     return False
                 else:
                     print("The password is invalid, please try again.")
