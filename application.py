@@ -30,8 +30,6 @@ class Application:
             print("There are no accounts to delete!\n")
         else:
             username = input("Please enter the username you're deleting: ")
-
-
             for acc in range(len(self.accountDict)-1):
                 if self.accountDict[acc].username == username:
                     account_info = self.accountDict[acc]
@@ -48,18 +46,48 @@ class Application:
         if self.accountDict == []:
             print("There are no accounts in the application to sign in to!\n")
         else:
-            username = input("Please enter your username to sign in: ")
-            for acc in range(len(self.accountDict)-1):
-                if self.accountDict[acc].username == username:
-                    account_info = self.accountDict[acc]
-                    password = str(input("Please enter your password: "))
-                    if password == account_info.password:
-                        sign_In = Sign_In_Page(account_info)
-                        sign_In.run()
-                    else:
-                        print("Wrong password, please try again!")
-                else:
-                    print(f'The username you enetered, \"{username}\", does not exist. Please try again')
+            username = str(input("Please enter your username to sign in: "))
+            for acc in self.accountDict:
+                try:
+                    if acc.username == username:
+                        account_info = acc
+                        password = str(input("Please enter your password: "))
+                        if password == account_info.password:
+                            sign_In = Sign_In_Page(account_info)
+                            sign_In.run()
+                            break
+                        else:
+                            print("Wrong password, please try again!")
+                finally :
+                    print(f'{username} does not exist in our system, please try again!')
+                    return sign_in
+    
+    
+
+
+            # for acc in range(len(self.accountDict)-1):
+            #     if self.accountDict[acc].username == username:
+            #         account_info = self.accountDict[acc]
+            #         password = str(input("Please enter your password: "))
+            #         if password == account_info.password:
+            #             sign_In = Sign_In_Page(account_info)
+            #             sign_In.run()
+            #         else:
+            #             print("Wrong password, please try again!")
+            #     else:
+            #         print(f'The username you enetered, \"{username}\", does not exist. Please try again')
+            
+            # for acc in range(len(self.accountDict)-1):
+            #     if self.accountDict[acc].username == username:
+            #         account_info = self.accountDict[acc]
+            #         password = str(input("Please enter your password: "))
+            #         if password == account_info.password:
+            #             sign_In = Sign_In_Page(account_info)
+            #             sign_In.run()
+            #         else:
+            #             print("Wrong password, please try again!")
+            #     else:
+            #         print(f'The username you enetered, \"{username}\", does not exist. Please try again')
 
 
     @classmethod
