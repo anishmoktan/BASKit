@@ -67,10 +67,14 @@ class Sign_In_Page:
     #     return True
 
     def update_account(self, new_username, new_password, new_email):
-        self.account.username = new_username
-        self.account.password = new_password
-        self.account.email = new_email
-        return True
+        for acc in self.accountDict:
+            if acc.username == new_username:
+                return True
+        else:
+            self.account.username = new_username
+            self.account.password = new_password
+            self.account.email = new_email
+            return False
 
     # def change_username(self):
     #     new_username = str(input('Enter the new username: '))
@@ -93,19 +97,29 @@ class Sign_In_Page:
     #     self.save()
     #     return True
 
-    def delete_account(self):
+    def delete_account(self, password):
         for i in range(len(self.accountList)):
             if self.accountList[i].username == self.account.username:
                 pop_acc = self.accountList[i]
-                password = input("Please enter the account's password for confirmation: ")
                 if password == pop_acc.password:
                     self.accountList.pop(i)
-                    print(f"Your account \'{self.account.username}\' has been successfully deleted!")
-                    self.save()
                     return False
-                else:
-                    print("The password is invalid, please try again.")
-        return True        
+            else:
+                return True
+
+
+        # for i in range(len(self.accountList)):
+        #     if self.accountList[i].username == self.account.username:
+        #         pop_acc = self.accountList[i]
+        #         #password = input("Please enter the account's password for confirmation: ")
+        #         if password == pop_acc.password:
+        #             self.accountList.pop(i)
+        #             print(f"Your account \'{self.account.username}\' has been successfully deleted!")
+        #             self.save()
+        #             return False
+        #         else:
+        #             print("The password is invalid, please try again.")
+        # return True        
 
     def run(self):
         while True:

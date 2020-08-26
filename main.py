@@ -11,10 +11,6 @@ cors = CORS(app)
 @app.route('/sign-up', methods=['POST'])
 def sign_up():
     data = request.get_json()
-    print(data)
-    print("YOOooooooooooooooo________________")
-    print(project)
-
     BE_answer = project.sign_up(data["username"],data["password"],data["email"])
     if BE_answer:
         return {"message":"An account with the username and/or email already exists, please try again!"}, 400 #error
@@ -65,19 +61,19 @@ def save_photo():
 
 
 @app.route('/update-account', methods=['POST'])
-def delete_account():
+def update_account():
     data = request.get_json()
     BE_answer , userdata = project.sign_in(data["username"],data["password"])
     if BE_answer:
-        
-
-
         return {"message":"The username of the password you've entered in incorrect, please try again"}, 400 #error
     else:
         sign_In = Sign_In_Page(userdata,project.accountDict)
-
-    pass
-
+        update_result = sign_In.update_account(data["new_username"],data["new_password"],data["new_email"])
+        if update_result:
+            return {"message":"The username already existis, please try another username"}, 400
+        else:
+            project.save()
+            return {"message": "Your account was updated!" , "data": userdata.__dict__ ] } , 200
 
 
 @app.route('/update-account', methods=['POST'])
@@ -88,8 +84,12 @@ def delete_account():
         return {"message":"The username of the password you've entered in incorrect, please try again"}, 400 #error
     else:
         sign_In = Sign_In_Page(userdata,project.accountDict)
-
-    pass
+        delete_result = sign_In.delete_account(data["password"])
+        if delete_result:
+            return {"message":"There was an error deleting your account, please try again"}, 400
+        else:
+            project.save()
+            return {"message": "Your account has been successfully deleted!" ] } , 200
 
 
 if __name__ == "__main__":

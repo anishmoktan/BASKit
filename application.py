@@ -31,19 +31,16 @@ class Application:
         else:
             #username = str(input("Please enter your username to sign in: "))
             for acc in self.accountDict:
-                    if acc.username == username:
-                        account_info = acc
+                if acc.username == username:
+                    account_info = acc
                         #password = str(input("Please enter your password: "))
-                        if password == account_info.password:
-                            sign_In = Sign_In_Page(account_info,self.accountDict)
+                    if password == account_info.password:
+                        sign_In = Sign_In_Page(account_info,self.accountDict)
                             #sign_In.run()
-                            return (False, account_info)
-                        else:
-                            return (True, None)
-                  
-            else:
-                print(f'The username \"{username}\" does not exist in our system!')
-                 
+                        return (False, account_info)
+                    else:
+                        return (True, None)
+
     @classmethod
     def from_json(cls, data):
         # data is the accounts from the accounts.json
