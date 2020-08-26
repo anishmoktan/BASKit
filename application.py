@@ -12,6 +12,9 @@ class Application:
 
     def sign_up(self,username,password,email):
         #username = input("Please enter a username for your account: ")
+        print(username)
+        print(password)
+        print(email)
         for acc in self.accountDict:
             if acc.username == username:
                 return(

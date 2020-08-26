@@ -3,6 +3,9 @@ app = Flask(__name__)
 
 from application import Application
 
+from flask_cors import CORS, cross_origin
+cors = CORS(app)
+
 
 
 
@@ -13,6 +16,9 @@ from application import Application
 @app.route('/sign-up', methods=['POST'])
 def sign_up():
     data = request.get_json()
+    print(data)
+    print("YOOooooooooooooooo________________")
+    print(project)
     x = project.sign_up(data["username"],data["password"],data["email"])
     return {"message":x}
 
@@ -63,9 +69,11 @@ def delete_account():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
     project = Application()
     project.load()
+    print(project)
+    app.run(debug=True)
+    
 
 # from main_menu import Main_Menu
 # if __name__ == "__main__":
