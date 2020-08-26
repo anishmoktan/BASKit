@@ -29,7 +29,7 @@ class Main_Menu:
             self.display_options()
             option = input("Enter an option: ")
             if option.lower() == "q":
-                print("Now saved all of the data to file")
+                print("JSON file has been saved to account.json file")
                 self.app.save()
                 break
 

@@ -10,20 +10,20 @@ class Application:
     def __init__(self, accountDic=[]):
         self.accountDict = accountDic
 
-    def sign_up(self):
-        username = input("Please enter a username for your account: ")
+    def sign_up(self,username,password,email):
+        #username = input("Please enter a username for your account: ")
         for acc in self.accountDict:
             if acc.username == username:
-                print(
-                    f"An account with the username \"{username}\" already exists, please try again!")
-                break
+                return(
+                    f"An account with the username and/or email {username} {email} already exists, please try again!")
+                
         else:
-            password = input("Please enter a password: ")
-            email = input("Please enter an email address: ")
+            #password = input("Please enter a password: ")
+            #email = input("Please enter an email address: ")
             account = Account(username, password, email)
             self.accountDict.append(account)
-            print(
-                f"Congratulations, you've successfully created an account with the username \"{username}\"!")
+            return(
+                f"Congratulations, you've successfully created an account with the username" + username)
 
     def sign_in(self):
         if self.accountDict == []:

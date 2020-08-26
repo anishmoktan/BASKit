@@ -24,6 +24,22 @@ class Sign_In_Page:
             "6": self.delete_account
         }
 
+    def save(self):
+        with open("accounts.json", "w") as accounts_json:
+            serilizated_data = self.serilization()
+            json.dump(serilizated_data, accounts_json,sort_keys=True, indent=4)
+    
+    def serilization(self):
+        exeList=[]
+        for i in range(len(self.accountList)):
+            serilizated = {}
+            serilizated["username"] = self.accountList[i].username
+            serilizated["password"] = self.accountList[i].password
+            serilizated["email"] = self.accountList[i].email
+            serilizated["gallery"] = self.accountList[i].gallery
+            exeList.append(serilizated)
+        return exeList
+
     def display_options(self):  
         print(f""" 
              Hi {self.account.username}, you've successfully signed in! 
@@ -44,6 +60,7 @@ class Sign_In_Page:
         ans = str(input("Would you like to save the image to your gallary? (yes/no): ").lower())
         if ans == 'yes':
             self.account.gallery[search]=image.image_link
+            self.save()
         else:
             return True
     
@@ -56,18 +73,21 @@ class Sign_In_Page:
         new_username = str(input('Enter the new username: '))
         self.account.username = new_username
         print(f"Your username has been changed to \"{new_username}\"\n")
+        self.save()
         return True
 
     def change_email(self):
         new_email = str(input('Enter the new email: '))
         self.account.email = new_email
         print(f"Your email has been changed to \"{new_email}\"\n")
+        self.save()
         return True
         
     def change_password(self):
         new_password = str(input('Enter the new password: '))
         self.account.password = new_password
         print(f"Your password has been changed to \"{new_password}\"\n")
+        self.save()
         return True
 
     def delete_account(self):
@@ -78,6 +98,7 @@ class Sign_In_Page:
                 if password == pop_acc.password:
                     self.accountList.pop(i)
                     print(f"Your account \'{self.account.username}\' has been successfully deleted!")
+                    self.save()
                     return False
                 else:
                     print("The password is invalid, please try again.")

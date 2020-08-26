@@ -4,5 +4,19 @@
         "gallery": {},
         "password": "mokta",
         "username": "mokta"
+    },
+    {
+        "email": "anish@gmail.com",
+        "gallery": {},
+        "password": "anish",
+        "username": "aaa"
+    },
+    {
+        "email": "anan",
+        "gallery": {
+            "new york": "https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+        },
+        "password": "moktan",
+        "username": "ana"
     }
 ]
