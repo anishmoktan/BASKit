@@ -13,10 +13,20 @@
     },
     {
         "email": "anan",
-        "gallery": {
-            "new york": "https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-        },
+        "gallery": {},
         "password": "moktan",
         "username": "ana"
+    },
+    {
+        "email": "asnih@gmail.com",
+        "gallery": {},
+        "password": "ss",
+        "username": "moktann"
+    },
+    {
+        "email": "ansih@gmail.com",
+        "gallery": {},
+        "password": "ss",
+        "username": "moktanffffn"
     }
 ]
