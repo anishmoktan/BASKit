@@ -64,9 +64,30 @@ def save_photo():
             return {"message": "Did not find the photo you were looking for"}, 400
 
 
-@app.route('/delete-account', methods=['POST'])
+@app.route('/update-account', methods=['POST'])
 def delete_account():
     data = request.get_json()
+    BE_answer , userdata = project.sign_in(data["username"],data["password"])
+    if BE_answer:
+        
+
+
+        return {"message":"The username of the password you've entered in incorrect, please try again"}, 400 #error
+    else:
+        sign_In = Sign_In_Page(userdata,project.accountDict)
+
+    pass
+
+
+
+@app.route('/update-account', methods=['POST'])
+def delete_account():
+    data = request.get_json()
+    BE_answer , userdata = project.sign_in(data["username"],data["password"])
+    if BE_answer:
+        return {"message":"The username of the password you've entered in incorrect, please try again"}, 400 #error
+    else:
+        sign_In = Sign_In_Page(userdata,project.accountDict)
 
     pass
 

@@ -61,31 +61,37 @@ class Sign_In_Page:
         return image.image_link
         
     
-    def show_gallery(self):
-        for key, value in self.account.gallery.items():
-            print(key, ' : ', value)
-        return True
+    # def show_gallery(self):
+    #     for key, value in self.account.gallery.items():
+    #         print(key, ' : ', value)
+    #     return True
 
-    def change_username(self):
-        new_username = str(input('Enter the new username: '))
+    def update_account(self, new_username, new_password, new_email):
         self.account.username = new_username
-        print(f"Your username has been changed to \"{new_username}\"\n")
-        self.save()
+        self.account.password = new_password
+        self.account.email = new_email
         return True
 
-    def change_email(self):
-        new_email = str(input('Enter the new email: '))
-        self.account.email = new_email
-        print(f"Your email has been changed to \"{new_email}\"\n")
-        self.save()
-        return True
+    # def change_username(self):
+    #     new_username = str(input('Enter the new username: '))
+    #     self.account.username = new_username
+    #     print(f"Your username has been changed to \"{new_username}\"\n")
+    #     self.save()
+    #     return True
+
+    # def change_email(self):
+    #     new_email = str(input('Enter the new email: '))
+    #     self.account.email = new_email
+    #     print(f"Your email has been changed to \"{new_email}\"\n")
+    #     self.save()
+    #     return True
         
-    def change_password(self):
-        new_password = str(input('Enter the new password: '))
-        self.account.password = new_password
-        print(f"Your password has been changed to \"{new_password}\"\n")
-        self.save()
-        return True
+    # def change_password(self):
+    #     new_password = str(input('Enter the new password: '))
+    #     self.account.password = new_password
+    #     print(f"Your password has been changed to \"{new_password}\"\n")
+    #     self.save()
+    #     return True
 
     def delete_account(self):
         for i in range(len(self.accountList)):
