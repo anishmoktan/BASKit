@@ -12,9 +12,6 @@ class Application:
 
     def sign_up(self,username,password,email):
         #username = input("Please enter a username for your account: ")
-        print(username)
-        print(password)
-        print(email)
         for acc in self.accountDict:
             if acc.username == username:
                 return(
@@ -26,7 +23,7 @@ class Application:
             account = Account(username, password, email)
             self.accountDict.append(account)
             return(
-                f"Congratulations, you've successfully created an account with the username \"{username}\"!")
+                f"Congratulations, you've successfully created an account with the username" + username)
 
     def sign_in(self):
         if self.accountDict == []:

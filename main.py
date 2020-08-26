@@ -7,12 +7,6 @@ from flask_cors import CORS, cross_origin
 cors = CORS(app)
 
 
-
-
-
-
-
-
 @app.route('/sign-up', methods=['POST'])
 def sign_up():
     data = request.get_json()
