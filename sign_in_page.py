@@ -3,117 +3,118 @@
 from account import Account
 from search_image import Search_Image
 import json
-import requests
-import os
 
 class Sign_In_Page:
     
-    def __init__(self, account):
+    def __init__(self, account, Acc_list):
         self.account = account
+        self.accountList = Acc_list
         self.options = {
 
             "1": self.search_photo,
 
-            "2": self.update_account,
+            "2": self.show_gallery,
 
-            "3": self.show_gallery,
+            "3": self.change_username,
 
-            "4": self.account.display_s,
+            "4": self.change_email,
 
-            "5": self.account.checkout
+            "5": self.change_password,
+
+            "6": self.delete_account
         }
 
-    def display_options(self):
-        print(""" 
-             You have successfully signed in! 
+    def save(self):
+        with open("accounts.json", "w") as accounts_json:
+            serilizated_data = self.serilization()
+            json.dump(serilizated_data, accounts_json,sort_keys=True, indent=4)
+    
+    def serilization(self):
+        exeList=[]
+        for i in range(len(self.accountList)):
+            serilizated = {}
+            serilizated["username"] = self.accountList[i].username
+            serilizated["password"] = self.accountList[i].password
+            serilizated["email"] = self.accountList[i].email
+            serilizated["gallery"] = self.accountList[i].gallery
+            exeList.append(serilizated)
+        return exeList
+
+    def display_options(self):  
+        print(f""" 
+             Hi {self.account.username}, you've successfully signed in! 
              Please choose one of the options below:
  
              1. Search Photos
-             2. Update Account
-             3. Show Gallery
+             2. Show Gallery
+             3. Change Username
+             4. Change email address
+             5. Change password
+             6. Delete account
              Q. Sign Out
              """)
 
-    def search_image(self):
-        search = input('What image would you like to search?')
+    def search_photo(self):
+        search = input('What image would you like to search?: ')
         image = Search_Image(search)
-        ans= input("Would you like to save the image to your gallary?").lower()
-        print("Please enter either yes or no")
-        if ans== 'yes':
-            self.gallery[counter]=image.image_link
-            self.counter += 1
+        ans = str(input("Would you like to save the image to your gallary? (yes/no): ").lower())
+        if ans == 'yes':
+            self.account.gallery[search]=image.image_link
+            self.save()
         else:
-            return display_options
+            return True
+    
+    def show_gallery(self):
+        for key, value in self.account.gallery.items():
+            print(key, ' : ', value)
+        return True
 
-   
+    def change_username(self):
+        new_username = str(input('Enter the new username: '))
+        self.account.username = new_username
+        print(f"Your username has been changed to \"{new_username}\"\n")
+        self.save()
+        return True
+
+    def change_email(self):
+        new_email = str(input('Enter the new email: '))
+        self.account.email = new_email
+        print(f"Your email has been changed to \"{new_email}\"\n")
+        self.save()
+        return True
+        
+    def change_password(self):
+        new_password = str(input('Enter the new password: '))
+        self.account.password = new_password
+        print(f"Your password has been changed to \"{new_password}\"\n")
+        self.save()
+        return True
+
+    def delete_account(self):
+        for i in range(len(self.accountList)):
+            if self.accountList[i].username == self.account.username:
+                pop_acc = self.accountList[i]
+                password = input("Please enter the account's password for confirmation: ")
+                if password == pop_acc.password:
+                    self.accountList.pop(i)
+                    print(f"Your account \'{self.account.username}\' has been successfully deleted!")
+                    self.save()
+                    return False
+                else:
+                    print("The password is invalid, please try again.")
+        return True        
 
     def run(self):
         while True:
             self.display_options()  
-
             option = input("Enter an option: ")
-
             if option.lower() == "q":
                 break
 
             action = self.options.get(option)
             if action:
-                action()
-
+                return_statement = action()
+                if return_statement == False:
+                    break
             else:
-                print(
-                    "{0} is not a valid option, Please try again".format(option))
-
-    def search_photo(self):
-
-        try:
-            amount = float(
-                input("Enter the amount of money you want to add: "))
-
-            if amount < 0:
-                raise Exception("Cannot accept negative value")
-
-            self.account.add_balance(amount)
-
-        except Exception as NegativeAmountError:
-            print(NegativeAmountError)
-
-        except:
-            print("Only number is allowed!")
-
-    def update_account(self):
-
-        item_name = input("Enter the name of the item: ").lower()
-
-        if item_name in self.price.keys():
-
-            try:
-                item_amount = int(
-                    input(f"How many of {item_name} do you want: "))
-
-                item_total_price = self.price[item_name] * item_amount
-
-                self.account.add_to_shopping_cart(
-                    (item_name, item_amount, item_total_price))
-
-            except ValueError:
-                print("Only number is allowed!")
-
-        else:
-            print(f"\"{item_name}\" not in the list")
-
-        time.sleep(2)
-
-    def show_gallery(self):
-
-        if len(self.account.shopping_cart) > 0:
-
-            target_name = input("Enter the name of the item: ").lower()
-            if target_name in self.price.keys():
-                self.account.remove_from_shopping_cart(target_name)
-            else:
-                print(f"\"{target_name}\" not in the list")
-        else:
-            print("You don't have anything in your shopping cart")
-
-        time.sleep(2)
+                print("{0} is not a valid option, please try again!".format(option))
