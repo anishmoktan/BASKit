@@ -1,16 +1,19 @@
 from flask import Flask, render_template, jsonify, request
-app = Flask(__name__)
+from flask_cors import CORS, cross_origin
 
 from application import Application
 from sign_in_page import Sign_In_Page
 
-from flask_cors import CORS, cross_origin
+app = Flask(__name__)
 cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 @app.route('/sign-up', methods=['POST'])
+@ cross_origin()
 def sign_up():
     data = request.get_json()
+    
     BE_answer = project.sign_up(data["username"],data["password"],data["email"])
     if BE_answer:
         return {"message":"An account with the username and/or email already exists, please try again!"}, 400 #error
@@ -18,9 +21,11 @@ def sign_up():
         project.save()
         return {"message":"Congratulations, you've successfully created an account"}, 200 #good
 
-@app.route('/login', methods=['GET'])
+@app.route('/login', methods=['POST'])
+@ cross_origin()
 def login():
     data = request.get_json()
+    print('this is data: ', data)
     BE_answer , userdata = project.sign_in(data["username"],data["password"]) 
 
     if BE_answer:
@@ -73,7 +78,7 @@ def update_account():
             return {"message":"The username already existis, please try another username"}, 400
         else:
             project.save()
-            return {"message": "Your account was updated!" , "data": userdata.__dict__ ] } , 200
+            return {"message": "Your account was updated!" , "data": userdata.__dict__  } , 200
 
 
 @app.route('/update-account', methods=['POST'])
@@ -89,7 +94,7 @@ def delete_account():
             return {"message":"There was an error deleting your account, please try again"}, 400
         else:
             project.save()
-            return {"message": "Your account has been successfully deleted!" ] } , 200
+            return {"message": "Your account has been successfully deleted!" } , 200
 
 
 if __name__ == "__main__":
