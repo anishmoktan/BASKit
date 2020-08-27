@@ -29,7 +29,7 @@ def login():
     account_existed , userdata = project.sign_in(username, password) 
 
     if account_existed:
-        return {"message":"The username of the password you've entered in incorrect, please try again"}, 400 #error
+        return {"message":"The username or the password you've entered in incorrect, please try again"}, 400 #error
     else:
         return {"message":"You've successfully signed in to your account", "data": userdata.__dict__ } , 200
 
