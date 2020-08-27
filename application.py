@@ -24,20 +24,15 @@ class Application:
             self.accountDict.append(account)
             return False
 
-    def sign_in(self,username,password):
+    def sign_in(self, username, password):
         if self.accountDict == []:
-            # print('this is self.accountDict empty: ', self.accountDict)
             return (True,None)
-            #("There are no accounts in the application to sign in to!\n")
         else:
-            #username = str(input("Please enter your username to sign in: "))
             for acc in self.accountDict:
-                # print('this is acc: ', acc)
-                return (False, acc) if acc.username == username and acc.password == password else (True, None)
-                # if acc.username == username and acc.password == password:
-                #     return (False, account_info) 
-                # else:
-                #     return (True, None)
+                if acc.username == username and acc.password == password:
+                    return (False, acc)
+            else:
+                return (True, None)
 
     @classmethod
     def from_json(cls, data):

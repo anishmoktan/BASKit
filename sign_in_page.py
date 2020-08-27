@@ -54,11 +54,9 @@ class Sign_In_Page:
              Q. Sign Out
              """)
 
-    def search_photo(self,search):
-        #search = input('What image would you like to search?: ')
+    def search_photo(self, search):
         image = Search_Image(search)
-        #ans = str(input("Would you like to save the image to your gallary? (yes/no): ").lower())
-        return image.image_link
+        return image.image_links
         
     
     # def show_gallery(self):
