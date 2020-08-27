@@ -1,22 +1,18 @@
 [
     {
-        "email": "mokta",
-        "gallery": {},
-        "password": "mokta",
-        "username": "mokta"
+        "email": "a489080573@gmail.com",
+        "gallery": [
+            "https://images.pexels.com/photos/404173/pexels-photo-404173.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+            "https://images.pexels.com/photos/313782/pexels-photo-313782.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+            "https://images.pexels.com/photos/290386/pexels-photo-290386.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+        ],
+        "password": "214890303",
+        "username": "kappa"
     },
     {
-        "email": "anish@gmail.com",
-        "gallery": {},
-        "password": "anish",
-        "username": "aaa"
-    },
-    {
-        "email": "anan",
-        "gallery": {
-            "new york": "https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-        },
-        "password": "moktan",
-        "username": "ana"
+        "email": "sabrina@gmail.com",
+        "gallery": [],
+        "password": "password",
+        "username": "sabrina123"
     }
 ]

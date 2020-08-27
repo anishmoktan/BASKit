@@ -9,41 +9,31 @@ from sign_in_page import Sign_In_Page
 class Application:
     def __init__(self, accountDic=[]):
         self.accountDict = accountDic
+        
 
     def sign_up(self,username,password,email):
         #username = input("Please enter a username for your account: ")
         for acc in self.accountDict:
             if acc.username == username:
-                return(
-                    f"An account with the username and/or email {username} {email} already exists, please try again!")
+                return True
                 
         else:
             #password = input("Please enter a password: ")
             #email = input("Please enter an email address: ")
             account = Account(username, password, email)
             self.accountDict.append(account)
-            return(
-                f"Congratulations, you've successfully created an account with the username" + username)
+            return False
 
-    def sign_in(self):
+    def sign_in(self, username, password):
         if self.accountDict == []:
-            print("There are no accounts in the application to sign in to!\n")
+            return (True,None)
         else:
-            username = str(input("Please enter your username to sign in: "))
             for acc in self.accountDict:
-                    if acc.username == username:
-                        account_info = acc
-                        password = str(input("Please enter your password: "))
-                        if password == account_info.password:
-                            sign_In = Sign_In_Page(account_info,self.accountDict)
-                            sign_In.run()
-                            break
-                        else:
-                            print("Wrong password, please try again!")
-                            break
+                if acc.username == username and acc.password == password:
+                    return (False, acc)
             else:
-                print(f'The username \"{username}\" does not exist in our system!')
-                 
+                return (True, None)
+
     @classmethod
     def from_json(cls, data):
         # data is the accounts from the accounts.json
