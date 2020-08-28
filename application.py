@@ -1,25 +1,16 @@
-# The back-bone of the application
-# Will have the CRUD for accounts and a Sign-in option
-# Need to connect to the API
 import json
 from account import Account
 from sign_in_page import Sign_In_Page
 
-
 class Application:
     def __init__(self, accountDic=[]):
-        self.accountDict = accountDic #[Object1, Object2]
+        self.accountDict = accountDic
         
-
     def sign_up(self,username,password,email):
-        #username = input("Please enter a username for your account: ")
         for acc in self.accountDict:
             if acc.username == username:
                 return True
-                
         else:
-            #password = input("Please enter a password: ")
-            #email = input("Please enter an email address: ")
             account = Account(username, password, email)
             self.accountDict.append(account)
             return False
@@ -36,7 +27,6 @@ class Application:
 
     @classmethod
     def from_json(cls, data):
-        # data is the accounts from the accounts.json
         decoded_accounts = []
         for i in range(len(data)):
             decoded_accounts.append(Account.from_json(data[i]))
@@ -54,7 +44,7 @@ class Application:
             json.dump(serilizated_data, accounts_json,sort_keys=True, indent=4)
 
     def serilization(self):
-        exeList=[]
+        exeList = []
         for i in range(len(self.accountDict)):
             serilizated = {}
             serilizated["username"] = self.accountDict[i].username

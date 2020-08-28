@@ -8,9 +8,12 @@
         "username": "sabrina1"
     },
     {
-        "email": "anish@gmail.com",
-        "gallery": [],
+        "email": "anish@gmal.com",
+        "gallery": [
+            "https://images.pexels.com/photos/1042206/pexels-photo-1042206.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+            "https://images.pexels.com/photos/507932/pexels-photo-507932.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+        ],
         "password": "password",
-        "username": "anish"
+        "username": "anishmoktan"
     }
 ]

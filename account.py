@@ -5,17 +5,11 @@ class Account():
         self.username = username
         self.password = password
         self.email = email
-        self.gallery=gallery #["http://fafahf newyork", "http:fafajsf"]
-
+        self.gallery=gallery 
     
     @classmethod
     def from_json(cls, data):
         username, password, email, gallery = data["username"], data["password"], data["email"], data["gallery"]
-
-        # for item in data["gallery"]:
-        #     tuple_item = tuple(item)
-        #     gallery.append(tuple_item)
-
         return cls(username=username, password=password, email=email, gallery=gallery)
     
     def __str__(self):
