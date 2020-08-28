@@ -5,7 +5,7 @@ class Account():
         self.username = username
         self.password = password
         self.email = email
-        self.gallery=gallery
+        self.gallery=gallery #["http://fafahf newyork", "http:fafajsf"]
 
     
     @classmethod

@@ -8,7 +8,7 @@ from sign_in_page import Sign_In_Page
 
 class Application:
     def __init__(self, accountDic=[]):
-        self.accountDict = accountDic
+        self.accountDict = accountDic #[Object1, Object2]
         
 
     def sign_up(self,username,password,email):

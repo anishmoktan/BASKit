@@ -65,7 +65,7 @@ class Sign_In_Page:
     #     return True
 
     def update_account(self, new_username, new_password, new_email):
-        for acc in self.accountDict:
+        for acc in self.accountList:
             if acc.username == new_username:
                 return True
         else:
@@ -102,8 +102,9 @@ class Sign_In_Page:
                 if password == pop_acc.password:
                     self.accountList.pop(i)
                     return False
-            else:
-                return True
+                else:
+                    return True
+           
 
 
         # for i in range(len(self.accountList)):
