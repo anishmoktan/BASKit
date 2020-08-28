@@ -29,8 +29,13 @@ def login():
     username, password = data["username"], data["password"]
     account_not_found , user_data = project.sign_in(username, password) 
 
+<<<<<<< HEAD
     if account_not_found:
         return {"message":"The username of the password you've entered in incorrect, please try again"}, 400 #error
+=======
+    if account_existed:
+        return {"message":"The username or the password you've entered in incorrect, please try again"}, 400 #error
+>>>>>>> ed481b7d1ff3c4b9600fbe1a7e42dcb2b9f5f29b
     else:
         return {"message":"You've successfully signed in to your account", "data": user_data.__dict__ } , 200
 
