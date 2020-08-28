@@ -64,11 +64,13 @@ class Sign_In_Page:
     #         print(key, ' : ', value)
     #     return True
 
-    def update_account(self, new_username, new_password, new_email):
+    def update_account(self, old_username, old_password, old_email, new_username, new_password, new_email):
+
         for acc in self.account_list:
-            if acc.username == new_username:
+            if (acc.username == new_username and self.account.username != new_username) or (acc.email == new_email and self.account.email != new_email):
                 return (True, None)
         else:
+            
             self.account.username = new_username
             self.account.password = new_password
             self.account.email = new_email
