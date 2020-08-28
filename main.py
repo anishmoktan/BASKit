@@ -131,10 +131,10 @@ def update_account():
     else:
         
         sign_in = Sign_In_Page(user_data, project.accountDict)
-        new_user_info_found, account_info = sign_in.update_account(new_username, new_password, new_email)
+        new_user_info_found, account_info = sign_in.update_account(old_username, old_password, old_email, new_username, new_password, new_email)
+            
         if new_user_info_found:
-            print()
-            return {"message":"The username already existed, please try another username"}, 400
+            return {"message":"The username and/or email already existed, please try another username"}, 400
         else:
             project.save()
             return {"message": "Your account was updated!" , "updatedAccount": account_info.__dict__  } , 200

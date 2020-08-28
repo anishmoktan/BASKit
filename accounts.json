@@ -1,9 +1,11 @@
 [
     {
         "email": "a489080573@gmail.com",
-        "gallery": [],
-        "password": "214890303",
-        "username": "kappa"
+        "gallery": [
+            "https://images.pexels.com/photos/313782/pexels-photo-313782.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+        ],
+        "password": "214890303123",
+        "username": "sabrina1"
     },
     {
         "email": "anish@gmail.com",
