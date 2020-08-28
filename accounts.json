@@ -1,45 +1,8 @@
 [
     {
         "email": "a489080573@gmail.com",
-        "gallery": [
-            "https://images.pexels.com/photos/404173/pexels-photo-404173.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-            "https://images.pexels.com/photos/313782/pexels-photo-313782.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-            "https://images.pexels.com/photos/290386/pexels-photo-290386.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-            "https://images.pexels.com/photos/1239162/pexels-photo-1239162.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-            "https://images.pexels.com/photos/1105766/pexels-photo-1105766.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-            "https://images.pexels.com/photos/2422588/pexels-photo-2422588.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-            "https://images.pexels.com/photos/410237/pexels-photo-410237.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-            "https://images.pexels.com/photos/2260786/pexels-photo-2260786.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-            "https://images.pexels.com/photos/2906882/pexels-photo-2906882.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-            "https://images.pexels.com/photos/218717/pexels-photo-218717.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-        ],
+        "gallery": [],
         "password": "214890303",
         "username": "kappa"
-    },
-    {
-        "email": "a489080573@gmail.com",
-        "gallery": [
-            "https://images.pexels.com/photos/404173/pexels-photo-404173.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-            "https://images.pexels.com/photos/2706653/pexels-photo-2706653.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-            "https://images.pexels.com/photos/2906882/pexels-photo-2906882.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-            "https://images.pexels.com/photos/410237/pexels-photo-410237.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-        ],
-        "password": "214890303",
-        "username": "anish"
-    },
-    {
-        "email": "randomemail@gmail.com",
-        "gallery": [],
-        "password": "123456789",
-        "username": "sarah"
-    },
-    {
-        "email": "cam@gmail.com",
-        "gallery": [
-            "https://images.pexels.com/photos/260024/pexels-photo-260024.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-            "https://images.pexels.com/photos/4733354/pexels-photo-4733354.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-        ],
-        "password": "123456789",
-        "username": "cam"
     }
 ]

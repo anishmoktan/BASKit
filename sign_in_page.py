@@ -6,9 +6,9 @@ import json
 
 class Sign_In_Page:
     
-    def __init__(self, account, Acc_list):
+    def __init__(self, account, account_list):
         self.account = account
-        self.accountList = Acc_list
+        self.account_list = account_list
         # self.options = {
 
         #     "1": self.search_photo,
@@ -65,14 +65,14 @@ class Sign_In_Page:
     #     return True
 
     def update_account(self, new_username, new_password, new_email):
-        for acc in self.accountDict:
+        for acc in self.account_list:
             if acc.username == new_username:
-                return True
+                return (True, None)
         else:
             self.account.username = new_username
             self.account.password = new_password
             self.account.email = new_email
-            return False
+            return (False, self.account)
 
     # def change_username(self):
     #     new_username = str(input('Enter the new username: '))
@@ -95,15 +95,13 @@ class Sign_In_Page:
     #     self.save()
     #     return True
 
-    def delete_account(self, password):
-        for i in range(len(self.accountList)):
-            if self.accountList[i].username == self.account.username:
-                pop_acc = self.accountList[i]
-                if password == pop_acc.password:
-                    self.accountList.pop(i)
-                    return False
-            else:
-                return True
+    def delete_account(self):
+        for i in range(len(self.account_list)):
+            if self.account_list[i].username == self.account.username:
+               self.account_list.pop(i)
+               return True
+        else:
+            return False
 
 
         # for i in range(len(self.accountList)):

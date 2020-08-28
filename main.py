@@ -14,7 +14,6 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 def sign_up():
     # request is the data from the frontend
     data = request.get_json()
-    print("this is the data from the frontend: ", data)
     username, password, email = data["username"], data["password"], data["email"]
     account_existed = project.sign_up(username, password, email)
     if account_existed:
@@ -122,33 +121,41 @@ def delete_photo():
 @ cross_origin()
 def update_account():
     data = request.get_json()
-    account_existed , userdata = project.sign_in(data["username"],data["password"])
-    if account_existed:
+    print('this is data in update: ', data)
+    old_username, old_password, old_email, new_username, new_password, new_email = data["oldUsername"], data["oldPassword"], data["oldEmail"], data["newUsername"], data["newPassword"], data["newEmail"]
+    account_not_found, user_data = project.sign_in(old_username, old_password)
+    
+    if account_not_found:
+        print('not found account')
         return {"message":"The username of the password you've entered in incorrect, please try again"}, 400 #error
     else:
-        sign_In = Sign_In_Page(userdata,project.accountDict)
-        update_result = sign_In.update_account(data["new_username"],data["new_password"],data["new_email"])
-        if update_result:
-            return {"message":"The username already existis, please try another username"}, 400
+        
+        sign_in = Sign_In_Page(user_data, project.accountDict)
+        new_user_info_found, account_info = sign_in.update_account(new_username, new_password, new_email)
+        if new_user_info_found:
+            print()
+            return {"message":"The username already existed, please try another username"}, 400
         else:
             project.save()
-            return {"message": "Your account was updated!" , "data": userdata.__dict__  } , 200
+            return {"message": "Your account was updated!" , "updatedAccount": account_info.__dict__  } , 200
 
 
-@app.route('/update-account', methods=['POST'])
+@app.route('/delete-account', methods=['POST'])
+@ cross_origin()
 def delete_account():
     data = request.get_json()
-    account_existed , userdata = project.sign_in(data["username"],data["password"])
-    if account_existed:
+    username, password = data["username"], data["password"]
+    account_not_found , user_data = project.sign_in(username, password)
+    if account_not_found:
         return {"message":"The username of the password you've entered in incorrect, please try again"}, 400 #error
     else:
-        sign_In = Sign_In_Page(userdata,project.accountDict)
-        delete_result = sign_In.delete_account(data["password"])
-        if delete_result:
-            return {"message":"There was an error deleting your account, please try again"}, 400
-        else:
+        sign_In = Sign_In_Page(user_data,project.accountDict)
+        delete_succeed = sign_In.delete_account()
+        if delete_succeed:
             project.save()
             return {"message": "Your account has been successfully deleted!" } , 200
+        else:
+            return {"message":"There was an error deleting your account, please try again"}, 400
 
 
 if __name__ == "__main__":
