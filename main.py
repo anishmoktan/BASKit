@@ -75,7 +75,6 @@ def save_photo():
             
         else:
             user_data.gallery.append(photo_url)
-            print('this is user_data: ', user_data)
             project.save()
             return {"message": "The photo was successfully saved to the account's gallery!", "data": user_data.__dict__ }  , 200
                 
@@ -102,7 +101,6 @@ def delete_photo():
                 return {"message":"Successfully delete the photo", "gallery": user_gallery}, 200 #success
                 
         else:
-            print("cannot find the image")
             return {"message":"Cannot find the photo"}, 400 #success
 
 
@@ -111,12 +109,10 @@ def delete_photo():
 @ cross_origin()
 def update_account():
     data = request.get_json()
-    print('this is data in update: ', data)
     old_username, old_password, old_email, new_username, new_password, new_email = data["oldUsername"], data["oldPassword"], data["oldEmail"], data["newUsername"], data["newPassword"], data["newEmail"]
     account_not_found, user_data = project.sign_in(old_username, old_password)
     
     if account_not_found:
-        print('not found account')
         return {"message":"The username of the password you've entered in incorrect, please try again"}, 400 #error
     else:
         
@@ -151,7 +147,6 @@ def delete_account():
 if __name__ == "__main__":
     project = Application()
     project.load()
-    # print(project)
     app.run(host="0.0.0.0", debug=True, port="5000")
     
 
