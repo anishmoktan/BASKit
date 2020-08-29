@@ -1,7 +1,10 @@
+import os
 from flask import Flask, render_template, jsonify, request
 from flask_cors import CORS, cross_origin
 from application import Application 
-from sign_in_page import Sign_In_Page 
+from sign_in_page import Sign_In_Page
+from search_image import Search_Image
+from aws_manager import AWS_Manager
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -17,6 +20,8 @@ def sign_up():
         return {"message":"An account with the username and/or email already exists, please try again!"}, 400 #error
     else:
         project.save()
+        aws_manager.upload_file()
+        os.remove('accounts.json')
         return {"message":"Congratulations, you've successfully created an account"}, 200 #good
 
 @app.route('/login', methods=['POST'])
@@ -35,20 +40,18 @@ def login():
 @ cross_origin()
 def search_photo():
     data = request.get_json()
-    username, password, search_term = data["username"], data["password"], data["searchTerm"]
-    account_not_found, user_data = project.sign_in(username, password)
+    search_term = data["searchTerm"]
     
-    if account_not_found:
-        return {"message":"The username of the password you've entered in incorrect, please try again"}, 400 #error
-    else:
-        sign_in = Sign_In_Page(user_data,project.accountDict)
-        search_result = sign_in.search_photo(search_term)
-        if len(search_result) > 0:
+    search_images = Search_Image(search_term)
+
+    search_result = search_images.image_links
+
+    if len(search_result) > 0:
             return {"message": "We found the photo you were looking for",
                     "photos": search_result
                     } , 200
-        else:
-            return {"message": "Did not find the photo you were looking for"}, 400
+    else:
+        return {"message": "Did not find the photo you were looking for"}, 400
 
 @app.route('/save-photo', methods=['POST'])
 @ cross_origin()
@@ -69,6 +72,8 @@ def save_photo():
         else:
             user_data.gallery.append(photo_url)
             project.save()
+            aws_manager.upload_file()
+            os.remove('accounts.json')
             return {"message": "The photo was successfully saved to the account's gallery!", "data": user_data.__dict__ }  , 200
                 
 
@@ -87,6 +92,9 @@ def delete_photo():
             image_url = user_gallery[i]
             if photo_url == image_url:
                 user_gallery.pop(i)
+                project.save()
+                aws_manager.upload_file()
+                os.remove('accounts.json')
                 return {"message":"Successfully delete the photo", "gallery": user_gallery}, 200        
         else:
             return {"message":"Cannot find the photo"}, 400 #success
@@ -110,6 +118,8 @@ def update_account():
             return {"message":"The username and/or email already existed, please try another username"}, 400
         else:
             project.save()
+            aws_manager.upload_file()
+            os.remove('accounts.json')
             return {"message": "Your account was updated!" , "updatedAccount": account_info.__dict__  } , 200
 
 
@@ -126,14 +136,27 @@ def delete_account():
         delete_succeed = sign_In.delete_account()
         if delete_succeed:
             project.save()
+            aws_manager.upload_file()
+            os.remove('accounts.json')
             return {"message": "Your account has been successfully deleted!" } , 200
         else:
             return {"message":"There was an error deleting your account, please try again"}, 400
 
+
+
+
+
+
 if __name__ == "__main__":
     project = Application()
+    aws_manager = AWS_Manager()
+    aws_manager.download_file()
     project.load()
-    app.run(host="0.0.0.0", debug=True, port="5000")
+    print('call')
+    
+    
+    
+    app.run(debug=True, port="5000")
     
 
 
