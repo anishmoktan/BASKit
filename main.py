@@ -152,11 +152,8 @@ if __name__ == "__main__":
     aws_manager = AWS_Manager()
     aws_manager.download_file()
     project.load()
-    print('call')
     
-    
-    
-    app.run(debug=True, port="5000")
+    app.run(host="0.0.0.0",debug=True, port="5000")
     
 
 
