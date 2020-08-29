@@ -80,16 +80,6 @@ def save_photo():
             return {"message": "The photo was successfully saved to the account's gallery!", "data": user_data.__dict__ }  , 200
                 
 
-
-        # sign_In = Sign_In_Page(userdata,project.accountDict)
-        # search_result = sign_In.search_photo(data["search"])
-        # if search_result:
-        #     userdata.gallery[data["search"]] = data["link"]
-        #     project.save()
-        #     return {"message": "The photo was successfully saved to the account's gallery!", "data": userdata["gallery"] }  , 200
-        # else:
-        #     return {"message": "Did not find the photo you were looking for"}, 400
-
 @app.route('/delete-photo', methods=["POST"])
 @cross_origin()
 def delete_photo():
@@ -162,11 +152,7 @@ if __name__ == "__main__":
     project = Application()
     project.load()
     # print(project)
-    app.run(debug=True)
+    app.run(host="0.0.0.0", debug=True, port="5000")
     
 
-# from main_menu import Main_Menu
-# if __name__ == "__main__":
-    # main_menu=Main_Menu()
-    # main_menu.run()
 
