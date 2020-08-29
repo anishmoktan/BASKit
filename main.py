@@ -70,10 +70,7 @@ def save_photo():
             user_data.gallery.append(photo_url)
             project.save()
             return {"message": "The photo was successfully saved to the account's gallery!", "data": user_data.__dict__ }  , 200
-<<<<<<< HEAD
                 
-=======
->>>>>>> 3044ced537f3377c5c57707a6a844934b3c72284
 
 @app.route('/delete-photo', methods=["POST"])
 @cross_origin()
@@ -92,14 +89,9 @@ def delete_photo():
                 user_gallery.pop(i)
                 return {"message":"Successfully delete the photo", "gallery": user_gallery}, 200        
         else:
-<<<<<<< HEAD
             return {"message":"Cannot find the photo"}, 400 #success
 
 
-=======
-            print("cannot find the image")
-            return {"message":"Cannot find the photo"}, 400 
->>>>>>> 3044ced537f3377c5c57707a6a844934b3c72284
 
 @app.route('/update-account', methods=['POST'])
 @ cross_origin()
@@ -109,12 +101,7 @@ def update_account():
     account_not_found, user_data = project.sign_in(old_username, old_password)
     
     if account_not_found:
-<<<<<<< HEAD
         return {"message":"The username of the password you've entered in incorrect, please try again"}, 400 #error
-=======
-        print('not found account')
-        return {"message":"The username of the password you've entered in incorrect, please try again"}, 400 
->>>>>>> 3044ced537f3377c5c57707a6a844934b3c72284
     else:
         sign_in = Sign_In_Page(user_data, project.accountDict)
         new_user_info_found, account_info = sign_in.update_account(old_username, old_password, old_email, new_username, new_password, new_email)
