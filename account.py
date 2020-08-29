@@ -1,7 +1,7 @@
 import json
 
 class Account():
-    def __init__(self, username, password, email, gallery={}):
+    def __init__(self, username, password, email, gallery=[]):
         self.username = username
         self.password = password
         self.email = email
@@ -10,13 +10,16 @@ class Account():
     
     @classmethod
     def from_json(cls, data):
-        username, password, email, gallery = data["username"], data["password"], data["email"], {}
+        username, password, email, gallery = data["username"], data["password"], data["email"], data["gallery"]
 
         # for item in data["gallery"]:
         #     tuple_item = tuple(item)
         #     gallery.append(tuple_item)
 
-        return cls(username=username, password=password,email=email, gallery=gallery)
+        return cls(username=username, password=password, email=email, gallery=gallery)
+    
+    def __str__(self):
+        return f"this is username: {self.username}\nthis is password: {self.password}\nthis is email: {self.email}\nthis is gallery: {self.gallery}"
        
     
 
