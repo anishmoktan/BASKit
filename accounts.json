@@ -8,9 +8,13 @@
         "username": "sabrina1"
     },
     {
-        "email": "a4890181110573@gmail.com",
-        "gallery": [],
+        "email": "anish@gmal.com",
+        "gallery": [
+            "https://images.pexels.com/photos/1042206/pexels-photo-1042206.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+            "https://images.pexels.com/photos/507932/pexels-photo-507932.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+        ],
         "password": "password",
+<<<<<<< HEAD
         "username": "sabrina12341"
     },
     {
@@ -54,5 +58,8 @@
         "gallery": [],
         "password": "214890303",
         "username": "kaihangchen"
+=======
+        "username": "anishmoktan"
+>>>>>>> 3044ced537f3377c5c57707a6a844934b3c72284
     }
 ]

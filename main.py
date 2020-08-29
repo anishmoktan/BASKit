@@ -1,18 +1,15 @@
 from flask import Flask, render_template, jsonify, request
 from flask_cors import CORS, cross_origin
-
-from application import Application
-from sign_in_page import Sign_In_Page
+from application import Application 
+from sign_in_page import Sign_In_Page 
 
 app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-
 @app.route('/sign-up', methods=['POST'])
 @ cross_origin()
 def sign_up():
-    # request is the data from the frontend
     data = request.get_json()
     username, password, email = data["username"], data["password"], data["email"]
     account_existed = project.sign_up(username, password, email)
@@ -30,10 +27,9 @@ def login():
     account_not_found , user_data = project.sign_in(username, password) 
 
     if account_not_found:
-        return {"message":"The username of the password you've entered in incorrect, please try again"}, 400 #error
+        return {"message":"The username or the password you've entered in incorrect, please try again"}, 400 #error
     else:
         return {"message":"You've successfully signed in to your account", "data": user_data.__dict__ } , 200
-
 
 @app.route('/search-photo', methods=['POST'])
 @ cross_origin()
@@ -47,7 +43,6 @@ def search_photo():
     else:
         sign_in = Sign_In_Page(user_data,project.accountDict)
         search_result = sign_in.search_photo(search_term)
-
         if len(search_result) > 0:
             return {"message": "We found the photo you were looking for",
                     "photos": search_result
@@ -61,49 +56,50 @@ def save_photo():
     data = request.get_json()
     username, password, photo_url = data["username"], data["password"], data["photoUrl"]
     acount_not_found, user_data = project.sign_in(username, password)
-    
+
     if acount_not_found:
         return {"message":"The username of the password you've entered in incorrect, please try again"}, 400 #error
     else:
-
         for i in range(len(user_data.gallery)):
             
             img_url = user_data.gallery[i]
 
             if img_url == photo_url:
-                return {"message": "You already added this photo"}, 400
-            
+                return {"message": "You already added this photo"}, 400   
         else:
             user_data.gallery.append(photo_url)
             project.save()
             return {"message": "The photo was successfully saved to the account's gallery!", "data": user_data.__dict__ }  , 200
+<<<<<<< HEAD
                 
+=======
+>>>>>>> 3044ced537f3377c5c57707a6a844934b3c72284
 
 @app.route('/delete-photo', methods=["POST"])
 @cross_origin()
 def delete_photo():
     data = request.get_json()
-
     username, password, photo_url = data["username"], data["password"], data["photoUrl"]
     account_not_found, user_data = project.sign_in(username, password)
     
     if account_not_found:
-        return {"message":"The username of the password you've entered in incorrect, please try again"}, 400 #error
-  
+        return {"message":"The username of the password you've entered in incorrect, please try again"}, 400 
     else:
         user_gallery = user_data.gallery
-
         for i in range(len(user_gallery)):
             image_url = user_gallery[i]
-
             if photo_url == image_url:
                 user_gallery.pop(i)
-                return {"message":"Successfully delete the photo", "gallery": user_gallery}, 200 #success
-                
+                return {"message":"Successfully delete the photo", "gallery": user_gallery}, 200        
         else:
+<<<<<<< HEAD
             return {"message":"Cannot find the photo"}, 400 #success
 
 
+=======
+            print("cannot find the image")
+            return {"message":"Cannot find the photo"}, 400 
+>>>>>>> 3044ced537f3377c5c57707a6a844934b3c72284
 
 @app.route('/update-account', methods=['POST'])
 @ cross_origin()
@@ -113,9 +109,13 @@ def update_account():
     account_not_found, user_data = project.sign_in(old_username, old_password)
     
     if account_not_found:
+<<<<<<< HEAD
         return {"message":"The username of the password you've entered in incorrect, please try again"}, 400 #error
+=======
+        print('not found account')
+        return {"message":"The username of the password you've entered in incorrect, please try again"}, 400 
+>>>>>>> 3044ced537f3377c5c57707a6a844934b3c72284
     else:
-        
         sign_in = Sign_In_Page(user_data, project.accountDict)
         new_user_info_found, account_info = sign_in.update_account(old_username, old_password, old_email, new_username, new_password, new_email)
             
@@ -142,7 +142,6 @@ def delete_account():
             return {"message": "Your account has been successfully deleted!" } , 200
         else:
             return {"message":"There was an error deleting your account, please try again"}, 400
-
 
 if __name__ == "__main__":
     project = Application()

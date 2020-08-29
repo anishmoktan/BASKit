@@ -12,14 +12,11 @@ class Application:
         
 
     def sign_up(self,username,password,email):
-        #username = input("Please enter a username for your account: ")
         for acc in self.accountDict:
             if acc.username == username:
                 return True
                 
         else:
-            #password = input("Please enter a password: ")
-            #email = input("Please enter an email address: ")
             account = Account(username, password, email)
             self.accountDict.append(account)
             return False

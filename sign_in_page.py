@@ -26,11 +26,17 @@ class Sign_In_Page:
             exeList.append(serilizated)
         return exeList
 
+<<<<<<< HEAD
 
     def search_photo(self, search):
         image = Search_Image(search)
         return image.image_links
         
+=======
+    def search_photo(self, search):
+        image = Search_Image(search)
+        return image.image_links
+>>>>>>> 3044ced537f3377c5c57707a6a844934b3c72284
 
     def update_account(self, old_username, old_password, old_email, new_username, new_password, new_email):
 
@@ -44,7 +50,10 @@ class Sign_In_Page:
             self.account.email = new_email
             return (False, self.account)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3044ced537f3377c5c57707a6a844934b3c72284
     def delete_account(self):
         for i in range(len(self.account_list)):
             if self.account_list[i].username == self.account.username:
@@ -53,3 +62,19 @@ class Sign_In_Page:
         else:
             return False
 
+<<<<<<< HEAD
+=======
+    # def run(self):
+    #     while True:  
+    #         option = input("Enter an option: ")
+    #         if option.lower() == "q":
+    #             break
+
+    #         action = self.options.get(option)
+    #         if action:
+    #             return_statement = action()
+    #             if return_statement == False:
+    #                 break
+    #         else:
+    #             print("{0} is not a valid option, please try again!".format(option))
+>>>>>>> 3044ced537f3377c5c57707a6a844934b3c72284
